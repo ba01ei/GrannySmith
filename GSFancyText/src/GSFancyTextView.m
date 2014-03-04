@@ -132,7 +132,7 @@
     
     void(^updateFrameBlock)() = ^{
         CGRect frame = self.frame;
-        frame.size.height = expectedHeight;
+        frame.size.height = roundf(expectedHeight);
         self.frame = frame;
     };
     
