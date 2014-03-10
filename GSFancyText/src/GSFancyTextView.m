@@ -69,6 +69,16 @@
     return GSAutoreleased(ftv);
 }
 
+- (void)setFancyText:(GSFancyText *)fancyText {
+    if (fancyText_ == fancyText) {
+        return;
+    }
+    dispatch_async(self.workingQueue, ^{
+        GSRelease(fancyText_);
+        fancyText_ = GSRetained(fancyText);
+    });
+}
+
 - (void)drawRect:(CGRect)rect
 {
     [fancyText_ drawInRect:rect];
