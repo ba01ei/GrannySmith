@@ -100,10 +100,10 @@
 }
 
 - (void)updateDisplayWithCompletionHandler:(void(^)())completionHandler justForResize:(BOOL)justForResize {
-    self.fancyText.width = self.frame.size.width;
+    CGSize currentSize = self.frame.size;
 //    self.hidden = YES;
     dispatch_async(self.workingQueue, ^{
-        CGSize currentSize = self.frame.size;
+        self.fancyText.width = currentSize.width;
         if (justForResize && currentSize.width == lastHandledSize_.width && currentSize.height == lastHandledSize_.height) {
             return;
         }
