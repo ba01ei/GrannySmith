@@ -18,11 +18,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0 || !defined(GS_ARC_ENABLED)
-    if (workingQueue_) {
-        dispatch_release(workingQueue_);
-    }
-#endif
+    free(workingQueue_);
 #ifdef GS_ARC_ENABLED
 }
 #else
