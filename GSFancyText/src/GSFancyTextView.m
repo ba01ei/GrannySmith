@@ -18,6 +18,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    free(workingQueue_);
 #ifdef GS_ARC_ENABLED
 }
 #else
@@ -47,7 +48,7 @@
 - (dispatch_queue_t)workingQueue {
     @synchronized(self) {
         if (!workingQueue_) {
-            workingQueue_ = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
+            workingQueue_ = dispatch_queue_create("gs.fancytext.queue", NULL);
         }
     }
     return workingQueue_;
